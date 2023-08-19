@@ -8,7 +8,10 @@
     <MudAppBar Elevation="0">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Dark" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         <MudSpacer />
+        <MudButton> Register </MudButton>
+        <MudButton> Login </MudButton>
     </MudAppBar>
+    
     <MudDrawer @bind-Open="_drawerOpen" Elevation="1">
         <MudDrawerHeader>
             <MudText Typo="Typo.h6">Full Name: Unknown</MudText>
@@ -23,6 +26,7 @@
 </MudLayout>
 
 @code {
+
     bool _drawerOpen = false;
 
     void DrawerToggle()
@@ -32,18 +36,17 @@
 
 
     MudTheme CustomTheme = new MudTheme()
+    {
+        Palette = new Palette()
         {
-            Palette = new Palette()
-            {
-                Primary = Colors.DeepOrange.Default,
-                Secondary = Colors.Orange.Default,
-                AppbarBackground = Colors.Orange.Default,
+            Primary = Colors.DeepOrange.Default,
+            Secondary = Colors.Orange.Default,
+            AppbarBackground = Colors.Orange.Default,
 
-            },
-            LayoutProperties = new LayoutProperties()
-            {
-                AppbarHeight = "100px",
-            },
-        };
-    
+        },
+        LayoutProperties = new LayoutProperties()
+        {
+            AppbarHeight = "35px",
+        },
+    };   
 }
