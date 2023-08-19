@@ -1,6 +1,6 @@
 ﻿@page "/"
 @using MudBlazor
-
+<MudThemeProvider Theme="CustomTheme" />
 
 <PageTitle>Full Name: Uknown</PageTitle>
 
@@ -8,7 +8,7 @@
 <MudCarousel Class="fullPageWidth" Style="height:400px; " ShowArrows="@arrows" ShowBullets="@bullets" EnableSwipeGesture="@enableSwipeGesture" AutoCycle="@autocycle" TData="object">
     <MudCarouselItem Transition="transition" Color="@Color.Primary">
         <div class="d-flex" style="height:100%; width:100%;">
-            <MudText Typo="Typo.h3" GutterBottom="true" Class="mx-auto my-auto" Size="@Size.Large">FULL NAME: UNKNOWN</MudText>
+            <MudText Typo="Typo.h3" GutterBottom="true" Class="mx-auto my-auto" Size="@Size.Large"><p>FULL NAME: UNKNOWN <br /> <MudText Typo="Typo.h4" Align="Align.Center" GutterBottom="true" Class="mx-auto my-auto" Size="@Size.Small"> Level up your game.</MudText></p></MudText>
         </div>
     </MudCarouselItem>
     <MudCarouselItem Transition="transition" Color="@Color.Primary">
@@ -29,16 +29,59 @@
         </div>
     </MudCarouselItem>
 </MudCarousel>
+
+
+<MudPaper Class="fullPageWidth" Style="position:relative; top:270px;" Elevation="0">
+    <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Style="position:relative; left:45%;"> REGISTER NOW </MudButton>
+    <br/><br/>
+    <MudButton Variant="Variant.Outlined" Color="Color.Error" Style="position:relative; left:43.5%;"> DOWNLOAD NEMESIS </MudButton>
+    <MudDivider DividerType="DividerType.Middle" Class="my-6" />
+    <MudText Typo="Typo.h4"> Who are we?</MudText>
+    <MudText>
+        We are Full Name: Unknown, a few computer science students passionate about reversing games and proving a better experience for gamers 
+        whether it be giving you that extra edge to win, allowing you to explore unknown regions of maps, or just doing a lil’ trolling.
+    </MudText>
+    <br/>
+    <MudText Typo="Typo.h4"> What do we provide?</MudText>
+    <MudText>
+        We strive to provide quality mods to all our members, feel free to download free versions or support us by purchasing our reasonably priced premium packages which gives you license keys to access all of our most entertaining features!
+    </MudText>
+    <br/>
+    <MudText Typo="Typo.h4"> What does the future hold? </MudText>
+    <MudText>
+        We have just released our first mod; NEMESIS, for the game Depp Rock Galactic which provides over 25 features all packaged in a clean and easy to navigate GUI!  We are not stopping there, and are already working on two more mods for the games For Honor and Dead by Daylight.
+        Once the ball is rolling we are planning to expand our team and even open the site up for up and coming developers to release their own mods if they have been verified as safe by our team, be on the lookout!
+
+    </MudText><br />
+    <MudText Typo="Typo.h4"> NEMESIS V1.2.4 </MudText>
+    <MudText>
+        Nemesis lets you harness the unknown technology of  "the rivals" in Deep Rock Galactic.  Its said no technology is a match for a dwarf but we wanted to see what happened when we merged them together...
+        Download Nemesis today and get access to an impressive list of features including but not limited to:<br/>
+        + Fly <br/>                     + Infinite flares<br/>
+        + No-clip   <br />                     + Infinite grenades<br />
+        + Infinite ammo  <br />                + Speed<br />
+        + Customisable firerate <br />         + Infinite jump<br />
+        + Infinite depositing <br />           + Infite resources + credits<br />
+        <br />
+        <br />
+        <br />
+    </MudText>
+</MudPaper>
+
+
 <style>
     .fullPageWidth {
-        background: orange;
+        background: white;
         position: absolute;
         top: 0px;
         right: 0px;
         bottom: 0px;
         left: 0px;
     }   
-
+    .centreText{
+        position:absolute;
+        right:50%;
+    }
 </style>
 @code{
     private bool arrows = true;
@@ -46,5 +89,27 @@
     private bool enableSwipeGesture = true;
     private bool autocycle = true;
     private Transition transition = Transition.Slide;
+
+    MudTheme CustomTheme = new MudTheme()
+    {
+        Palette = new Palette()
+        {
+            Primary = Colors.DeepOrange.Default,
+            Secondary = Colors.DeepOrange.Default,
+            AppbarBackground = Colors.DeepOrange.Default,
+
+        },
+        LayoutProperties = new LayoutProperties()
+        {
+            AppbarHeight = "35px",
+        },
+        Typography = new Typography()
+        {
+            Default = new Default()
+            {
+                FontFamily = new[] { "Poppins", "Helvetica", "Arial", "sans-serif", "Impact" }
+            }
+        }
+    };
 }
 

@@ -8,8 +8,12 @@
     <MudAppBar Elevation="0">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Dark" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         <MudSpacer />
+        <a href="https://discord.gg/TkmX8P6Ku"><MudImage Src="Discord.png" Alt="Discord" Elevation="0" Class="rounded-lg" Style="position:relative; width:20px; height:20px; right:50px" /></a>
+        <a href="https://www.youtube.com"><MudImage Src="youtube.png" Alt="Youtube" Elevation="0" Class="rounded-lg" Style="position:relative; width:30px; height:20px; right:45px" /></a>
+        <a href="https://www.instagram.com/fullname_unknown_/?hl=en"><MudImage Src="Instagram.png" Alt="Instagram" Elevation="0" Class="rounded-lg" Style="position:relative; width:20px; height:20px; right:45px" /></a>
         <MudButton> Register </MudButton>
         <MudButton> Login </MudButton>
+        
     </MudAppBar>
     
     <MudDrawer @bind-Open="_drawerOpen" Elevation="1">
@@ -39,14 +43,21 @@
     {
         Palette = new Palette()
         {
-            Primary = Colors.Orange.Default,
-            Secondary = Colors.Orange.Default,
-            AppbarBackground = Colors.Orange.Default,
+            Primary = Colors.DeepOrange.Default,
+            Secondary = Colors.DeepOrange.Default,
+            AppbarBackground = Colors.DeepOrange.Default,
 
         },
         LayoutProperties = new LayoutProperties()
         {
             AppbarHeight = "35px",
         },
+        Typography = new Typography()
+        {
+            Default = new Default()
+            {
+                FontFamily = new[] { "Poppins", "Helvetica", "Arial", "sans-serif", "Impact" }
+            }
+        }
     };   
 }
