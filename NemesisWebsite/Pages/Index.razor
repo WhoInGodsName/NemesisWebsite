@@ -4,19 +4,47 @@
 
 <PageTitle>Full Name: Uknown</PageTitle>
 
-<MudText Typo="Typo.h3" GutterBottom="true">LEVEL UP YOUR GAMEPLAY.</MudText>
-<MudText Typo="Typo.h4" GutterBottom="true">Mods that have your back when you need that extra edge!</MudText>
 
+<MudCarousel Class="fullPageWidth" Style="height:400px; " ShowArrows="@arrows" ShowBullets="@bullets" EnableSwipeGesture="@enableSwipeGesture" AutoCycle="@autocycle" TData="object">
+    <MudCarouselItem Transition="transition" Color="@Color.Primary">
+        <div class="d-flex" style="height:100%; width:100%;">
+            <MudText Typo="Typo.h3" GutterBottom="true" Class="mx-auto my-auto" Size="@Size.Large">FULL NAME: UNKNOWN</MudText>
+        </div>
+    </MudCarouselItem>
+    <MudCarouselItem Transition="transition" Color="@Color.Primary">
+        <div class="d-flex" style="height:100%; width:100%;">
+            <MudText Typo="Typo.h3" GutterBottom="true"  Class="mx-auto my-auto" Size="@Size.Large">LEVEL UP YOUR GAMEPLAY.</MudText>
+        </div>
+    </MudCarouselItem>
+
+    <MudCarouselItem Transition="transition" Color="@Color.Primary">
+        <div class="d-flex" style="height:100%; width:100%;">
+            <MudText Typo="Typo.h4" GutterBottom="true" Class="mx-auto my-auto" Size="@Size.Large">Mods that have your back when you need that extra edge!</MudText>
+        </div>
+    </MudCarouselItem>
+
+    <MudCarouselItem Transition="transition" Color="@Color.Primary">
+        <div class="d-flex" style="height:100%; width:100%;">
+            <MudText Typo="Typo.h3" GutterBottom="true" Class="mx-auto my-auto" Size="@Size.Large">DOWNLOAD NEMESIS V1.2.4!</MudText>
+        </div>
+    </MudCarouselItem>
+</MudCarousel>
+<style>
+    .fullPageWidth {
+        background: orange;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+    }   
+
+</style>
 @code{
-    MudTheme CustomTheme = new MudTheme()
-        {
-            Palette = new Palette()
-            {
-                Primary = Colors.DeepOrange.Default,
-                Secondary = Colors.Orange.Default,
-                AppbarBackground = Colors.Orange.Default,
-               
-            }
-        };
+    private bool arrows = true;
+    private bool bullets = true;
+    private bool enableSwipeGesture = true;
+    private bool autocycle = true;
+    private Transition transition = Transition.Slide;
 }
 
