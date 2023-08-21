@@ -1,5 +1,7 @@
 ﻿@page "/"
 @using MudBlazor
+@inject IDialogService DialogService
+
 <MudThemeProvider Theme="CustomTheme" />
 
 <PageTitle>Full Name: Uknown</PageTitle>
@@ -32,7 +34,7 @@
 
 
 <MudPaper Class="fullPageWidth" Style="position:relative; top:270px;" Elevation="0">
-    <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Style="position:relative; left:45%;"> REGISTER NOW </MudButton>
+    <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Style="position:relative; left:45%;" @onclick="OpenDialog"> REGISTER NOW </MudButton>
     <br/><br/>
     <MudButton Variant="Variant.Outlined" Color="Color.Error" Href="mods" Match="NavLinkMatch.All" Style="position:relative; left:43.5%;"> DOWNLOAD NEMESIS </MudButton>
     <MudDivider DividerType="DividerType.Middle" Class="my-6" />
@@ -119,5 +121,10 @@
             }
         }
     };
+    private void OpenDialog()
+    {
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+        DialogService.Show<Register>("Register", options);
+    }
 }
 
