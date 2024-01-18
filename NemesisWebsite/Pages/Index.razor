@@ -1,10 +1,18 @@
 ﻿@page "/"
 @using MudBlazor
+@using System.IO
+@using System.Net.Http;
+@using HtmlAgilityPack;
+@using System.Diagnostics;
+@using System.Collections;
+@inject IJSRuntime JS
 @inject IDialogService DialogService
 
 <MudThemeProvider Theme="CustomTheme" />
 
 <PageTitle>Full Name: Uknown</PageTitle>
+
+
 
 
 <MudCarousel Class="fullPageWidth" Style="height:400px; " ShowArrows="@arrows" ShowBullets="@bullets" EnableSwipeGesture="@enableSwipeGesture" AutoCycle="@autocycle" TData="object">
@@ -15,7 +23,7 @@
     </MudCarouselItem>
     <MudCarouselItem Transition="transition" Color="@Color.Primary">
         <div class="d-flex" style="height:100%; width:100%;">
-            <MudText Typo="Typo.h3" GutterBottom="true"  Class="mx-auto my-auto" Size="@Size.Large">LEVEL UP YOUR GAMEPLAY.</MudText>
+            <MudText Typo="Typo.h3" GutterBottom="true"  Class="mx-auto my-auto" Size="@Size.Large">LEVEL UP YOUR GAME.</MudText>
         </div>
     </MudCarouselItem>
 
@@ -27,16 +35,15 @@
 
     <MudCarouselItem Transition="transition" Color="@Color.Primary">
         <div class="d-flex" style="height:100%; width:100%;">
-            <MudText Typo="Typo.h3" GutterBottom="true" Class="mx-auto my-auto" Size="@Size.Large">DOWNLOAD NEMESIS V1.2.4!</MudText>
+            <MudText Typo="Typo.h3" GutterBottom="true" Class="mx-auto my-auto" Size="@Size.Large">DOWNLOAD NEMESIS V1.3.2!</MudText>
         </div>
     </MudCarouselItem>
 </MudCarousel>
 
 
 <MudPaper Class="fullPageWidth" Style="position:relative; top:270px;" Elevation="0">
-    <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Style="position:relative; left:45%;" @onclick="OpenDialog"> REGISTER NOW </MudButton>
-    <br/><br/>
-    <MudButton Variant="Variant.Outlined" Color="Color.Error" Href="mods" Match="NavLinkMatch.All" Style="position:relative; left:43.5%;"> DOWNLOAD NEMESIS </MudButton>
+    <br/>
+    <MudButton Variant="Variant.Outlined" Color="Color.Error" OnClick="@DownloadFileFromStream" Style="position:relative; left:41%;"> DOWNLOAD NEMESIS 1.3.2 </MudButton>
     <MudDivider DividerType="DividerType.Middle" Class="my-6" />
     <MudText Typo="Typo.h4"> Who are we?</MudText>
     <MudText>
@@ -51,29 +58,50 @@
     <br/>
     <MudText Typo="Typo.h4"> What does the future hold? </MudText>
     <MudText>
-        We have just released our first mod; NEMESIS, for the game Depp Rock Galactic which provides over 25 features all packaged in a clean and easy to navigate GUI!  We are not stopping there, and are already working on two more mods for the games For Honor and Dead by Daylight.
+        We have just released our first mod; NEMESIS, for the game Deep Rock Galactic which provides over 25 features all packaged in a clean and easy to navigate GUI!  We are not stopping there, and are already working on two more mods for the games For Honor and Dead by Daylight.
         Once the ball is rolling we are planning to expand our team and even open the site up for up and coming developers to release their own mods if they have been verified as safe by our team, be on the lookout!
 
     </MudText><br />
-    <MudText Typo="Typo.h4"> NEMESIS V1.2.4 </MudText>
-    <MudText>
-        Nemesis lets you harness the unknown technology of  "the rivals" in Deep Rock Galactic.  Its said no technology is a match for a dwarf but we wanted to see what happened when we merged them together...
-        Download Nemesis today and get access to an impressive list of features including but not limited to:<br/>
-        + Fly <br/>                     + Infinite flares<br/>
-        + No-clip   <br />                     + Infinite grenades<br />
-        + Infinite ammo  <br />                + Speed<br />
-        + Customisable firerate <br />         + Infinite jump<br />
-        + Infinite depositing <br />           + Infite resources + credits<br />
-        
-    </MudText>
+    <MudText Typo="Typo.h4"> NEMESIS V1.3.2 </MudText>
+    <MudDivider DividerType="DividerType.Middle" Class="my-6" />
+    <MudText Typo="Typo.h4">Features</MudText>
+    <MudChip Color="Color.Success">Infinite ammunition</MudChip>
+    <MudChip Color="Color.Success">Full auto for all guns</MudChip>
+    <MudChip Color="Color.Success">FOV changer</MudChip>
+    <MudChip Color="Color.Success">Custom firerate</MudChip><br />
+    <MudChip Color="Color.Success">Infinite jump</MudChip>
+    <MudChip Color="Color.Success">Downed movement</MudChip>
+    <MudChip Color="Color.Success">infinite flares</MudChip>
+    <MudChip Color="Color.Success">No flare cooldown</MudChip><br />
+    <MudChip Color="Color.Success">infinite grenades</MudChip>
+    <MudChip Color="Color.Success">Teleport</MudChip>
+    <MudChip Color="Color.Success">Throw strength changer</MudChip>
+    <MudChip Color="Color.Success">Third person mode</MudChip><br />
+    <MudChip Color="Color.Success">Speed</MudChip>
+    <MudChip Color="Color.Success">Fly</MudChip>
+    <MudChip Color="Color.Success">infinite deposit mode</MudChip><br />
+
+    <MudChip Color="Color.Success">Character model size changer</MudChip>
+    <MudChip Color="Color.Success">Unlimited perk points</MudChip>
+    <MudChip Color="Color.Success">12 different in-game emotes</MudChip>
+    <MudChip Color="Color.Success">Edit deposited resource amount</MudChip><br />
+    <MudChip Color="Color.Success">+5 scrip</MudChip>
+    <MudChip Color="Color.Success">No cash shopping</MudChip>
+    <MudChip Color="Color.Success">God mode</MudChip>
+    <MudChip Color="Color.Success">No Clip</MudChip><br />
+    <MudChip Color="Color.Success">Class specific cheats</MudChip>
+    <MudChip Color="Color.Success">+  Lifetime access to all future updates and features!</MudChip>
     <MudDivider DividerType="DividerType.Middle" Class="my-6" />
     <MudText Typo="Typo.h4">Showcase</MudText>
-    <video controls="controls" width="600px" height="400px" style="position:absolute;">
-        <source src="/showcase.mov" />
+    <MudImage Src="Images/page1.PNG" Width="600" Height="350" Alt="Mony the dog" Elevation="25" Class="rounded-lg" />
+    <MudImage Src="Images/page2.PNG" Width="600" Height="350" Alt="Mony the dog" Elevation="25" Class="rounded-lg" /><br />
+    <video controls="controls" width="600" height="400" style="position:absolute;">
+        <source src="/showcase1.mp4" />
     </video>
-    <video controls="controls" width="600px" height="400px" style="position:absolute; left: 50%;">
-        <source src="/showcase.mov" />
+    <video controls="controls" width="600" height="400" style="position:absolute; left: 50%;">
+        <source src="/showcase2.mp4" />
     </video>
+    
 </MudPaper>
 
 
@@ -94,6 +122,11 @@
     }
 </style>
 @code{
+
+    [Inject]
+    HttpClient Client { get; set; }
+    byte[] file;
+
     private bool arrows = true;
     private bool bullets = true;
     private bool enableSwipeGesture = true;
@@ -125,6 +158,39 @@
     {
         var options = new DialogOptions { CloseOnEscapeKey = true };
         DialogService.Show<Register>("Register", options);
+    }
+
+    async Task GetFile()
+    {
+        file = await Client.GetByteArrayAsync("/Nemesis1.3.2.zip");
+    }
+
+    private async Task DownloadFileFromStream()
+    {
+        await GetFile();
+        var fileStream = new MemoryStream(file);
+
+        var fileName = "Nemesis1.3.2.zip";
+
+        using var streamRef = new DotNetStreamReference(stream: fileStream);
+
+        await JS.InvokeVoidAsync("downloadFileFromStream", fileName, streamRef);
+    }
+
+
+
+    private void GetDownloads()
+    {
+        string url = "https://www.unknowncheats.me/forum/downloads.php?do=file&id=42859";
+        HttpClient httpClient = new HttpClient();
+        var html = httpClient.GetStringAsync(url).Result;
+        var htmlDocument = new HtmlDocument();
+        htmlDocument.LoadHtml(html);
+
+        var downloadElement = htmlDocument.DocumentNode.SelectSingleNode("//td[@class='alt2']");
+        var downloads = downloadElement.InnerText.Trim();
+        Debug.WriteLine(downloads);
+        
     }
 }
 
