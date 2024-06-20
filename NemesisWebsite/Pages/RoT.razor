@@ -1,8 +1,100 @@
 ﻿@page "/rot"
 
+@inject IJSRuntime JS
+@inject IDialogService DialogService
+
 <MudPaper Class="fullPageWidth" Style="position:relative; top:0px;" Elevation="0">
-    <MudText Typo="Typo.h2"> Risk of Tears </MudText>
+    <MudText Typo="Typo.h1"> Risk of Tears </MudText>
+    <MudButton Variant="Variant.Outlined" Color="Color.Error" OnClick="@DownloadFileFromStream"> Download Risk of Tears 1.1.1</MudButton>
     <MudDivider DividerType="DividerType.Middle" Class="my-6" />
-    <MudText Typo="Typo.h6"> Risk of Tears is a mod for the game Risk of Rain 2</MudText>
+    <MudText>
+        Risk of Rain 2 is a game that was published in the year 2020 for most platforms currently available such as windows, mac, xbox etc.
+        Risk of Rain 2 was a game created within the game engine Unity3D and Mono which is an open source implementation of the .NET framework and C#.
+        Mono allows for the game to be moddified using a mono injector which is a special way of injecting a dll into a game that uses this framework so that the dll is able to call
+        Unity Engine 3D specific functions without having to use techniques like hooking which is a common technique for more modern Unity Engine 3D games with the introduction of il2cpp.
+        il2cpp (Intermediate language to c++) is a more modern framework that has been introduced that converts the .NET mono code (the intermediate language) into c++ (cpp) so it is easier to run on an assortment of different platforms without much modification.
+        <br />
+        <br />
+        This internal cheat uses the Mono injector method that was mentioned earlier to inject the dll into RoR2 and manipulate what is happening.  The MonoInjector is included within the zip file
+        that can be downloaded from a click of the button above for user convenience!  If you need additional help in running there is also a supplied installation guide below and a readme file!
+    </MudText>
     
 </MudPaper>
+<MudPaper Class="fullPageWidth" Style="position:relative;" Elevation="0">
+
+    <MudDivider DividerType="DividerType.Middle" Class="my-6" />
+    <MudChip Color="Color.Success">Unlock all characters</MudChip>
+    <MudChip Color="Color.Success">No cooldowns</MudChip>
+    <MudChip Color="Color.Success">Unlock all achievements</MudChip>
+    <MudChip Color="Color.Success">Custom character speed</MudChip><br />
+    <MudChip Color="Color.Success">Infinite jump</MudChip>
+    <MudChip Color="Color.Success">Body changer</MudChip>
+    <MudChip Color="Color.Success">inf lunar coins</MudChip>
+    <MudChip Color="Color.Success">inf coins</MudChip><br />
+    <MudChip Color="Color.Success">Custom pickup messages</MudChip>
+    <MudChip Color="Color.Success">Prefab spawner</MudChip>
+    <MudChip Color="Color.Success">Team manager menu</MudChip>
+    <MudChip Color="Color.Success">Item add/remove menu</MudChip><br />
+    <MudChip Color="Color.Success">Custom firerate</MudChip>
+    <MudDivider DividerType="DividerType.Middle" Class="my-6" />
+
+    
+
+    <MudGrid>
+        <MudItem xs="6">
+            <MudText Typo="Typo.h4">Showcase</MudText>
+            <MudImage Src="Images/rotImage.png" Width="300" Height="600" Alt="Mony the dog" Elevation="25" Class= "img-fluid float-end col-4"/>
+        </MudItem>
+        <MudItem xs="6">
+            <MudText Typo="Typo.h4">Installation Guide</MudText>
+            <MudPaper Class="d-flex mud-width-full py-8" Elevation="0">
+                <MudText >
+                
+                1. Download Risk of Tears
+                <br />
+                2. Extract the zip file
+                <br />
+                3. Run "smi_gui.exe"
+                <br />
+                4. Enter the following into the correct fields and inject!
+                <br />
+                <br />
+                    <strong>
+                        FIELD VALUES
+                    </strong>
+                <br />
+                Namespace: RoRModNET4<br />
+                Class name: Loader<br />
+                Method name: Init
+                
+                </MudText>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+
+
+    
+</MudPaper>
+
+@code {
+    [Inject]
+    HttpClient Client { get; set; }
+    byte[] file;
+
+    async Task GetFile()
+    {
+        file = await Client.GetByteArrayAsync("/RoT1.1.1.zip");
+    }
+
+    private async Task DownloadFileFromStream()
+    {
+        await GetFile();
+        var fileStream = new MemoryStream(file);
+
+        var fileName = "RoT1.1.1.zip";
+
+        using var streamRef = new DotNetStreamReference(stream: fileStream);
+
+        await JS.InvokeVoidAsync("downloadFileFromStream", fileName, streamRef);
+    }
+}

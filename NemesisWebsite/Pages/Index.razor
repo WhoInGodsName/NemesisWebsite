@@ -18,7 +18,7 @@
 <MudCarousel Class="fullPageWidth" Style="height:400px; " ShowArrows="@arrows" ShowBullets="@bullets" EnableSwipeGesture="@enableSwipeGesture" AutoCycle="@autocycle" TData="object">
     <MudCarouselItem Transition="transition" Color="@Color.Primary">
         <div class="d-flex" style="height:100%; width:100%;">
-            <MudText Typo="Typo.h3" GutterBottom="true" Class="mx-auto my-auto" Size="@Size.Large"><p>FULL NAME: UNKNOWN <br /> <MudText Typo="Typo.h4" Align="Align.Center" GutterBottom="true" Class="mx-auto my-auto" Size="@Size.Small"> Level up your game.</MudText></p></MudText>
+            <MudText Typo="Typo.h3" GutterBottom="true" Class="mx-auto my-auto" Size="@Size.Large"><p>FULL NAME UNKNOWN <br /> <MudText Typo="Typo.h4" Align="Align.Center" GutterBottom="true" Class="mx-auto my-auto" Size="@Size.Small"> Level up your game.</MudText></p></MudText>
         </div>
     </MudCarouselItem>
     <MudCarouselItem Transition="transition" Color="@Color.Primary">
@@ -35,7 +35,7 @@
 
     <MudCarouselItem Transition="transition" Color="@Color.Primary">
         <div class="d-flex" style="height:100%; width:100%;">
-            <MudText Typo="Typo.h3" GutterBottom="true" Class="mx-auto my-auto" Size="@Size.Large">DOWNLOAD NEMESIS V1.4.2!</MudText>
+            <MudText Typo="Typo.h3" GutterBottom="true" Class="mx-auto my-auto" Size="@Size.Large">DOWNLOAD NEMESIS V1.4.3!</MudText>
         </div>
     </MudCarouselItem>
 </MudCarousel>
@@ -43,7 +43,7 @@
 
 <MudPaper Class="fullPageWidth" Style="position:relative; top:270px;" Elevation="0">
     <br/>
-    <MudButton Variant="Variant.Outlined" Color="Color.Error" OnClick="@DownloadFileFromStream" Style="position:relative; left:41%;"> DOWNLOAD NEMESIS 1.4.2 </MudButton>
+    <MudButton Variant="Variant.Outlined" Color="Color.Error" OnClick="@DownloadFileFromStream" Style="position:relative; left:41%;"> DOWNLOAD NEMESIS 1.4.3 </MudButton>
     <MudDivider DividerType="DividerType.Middle" Class="my-6" />
     <MudText Typo="Typo.h4"> Who are we?</MudText>
     <MudText>
@@ -125,7 +125,7 @@
 
     async Task GetFile()
     {
-        file = await Client.GetByteArrayAsync("/Nemesis1.3.2.zip");
+        file = await Client.GetByteArrayAsync("/Nemesis1.4.3.zip");
     }
 
     private async Task DownloadFileFromStream()
@@ -133,7 +133,7 @@
         await GetFile();
         var fileStream = new MemoryStream(file);
 
-        var fileName = "Nemesis1.3.2.zip";
+        var fileName = "Nemesis1.4.3.zip";
 
         using var streamRef = new DotNetStreamReference(stream: fileStream);
 
